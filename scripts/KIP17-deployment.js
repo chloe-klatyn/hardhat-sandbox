@@ -13,8 +13,30 @@ const path = require("path");
     fs.writeFile("./deployed/kip17TokenAddress", kip17.address, (err) => {
       if (err) throw err;
       console.log(
-        `The deployed contract address * ${kip17.address} * is recorded on deployedAddress file`
+        `The deployed contract address * ${kip17.address} * is recorded in the kip17TokenAddress file`
       );
+    });
+
+    const directory = path.join(
+      process.cwd(),
+      "artifacts/contracts/token/KIP17/KIP17.sol/KIP17.json"
+    );
+
+    await fs.readFile(directory, function (err, data) {
+      const abi = JSON.parse(data.toString());
+      fs.writeFile(
+        "./deployed/kip17TokenABI.json",
+        JSON.stringify(abi.abi, 2),
+        (err) => {
+          if (err) throw err;
+          console.log(
+            `The abi of contract ${kip17.address} is recorded in the kip17TokenABI file`
+          );
+        }
+      );
+      if (err) {
+        console.error(error);
+      }
     });
   }
 })();
