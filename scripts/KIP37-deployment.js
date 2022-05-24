@@ -10,7 +10,7 @@ const path = require("path");
     fs.mkdir("./deployed", { recursive: true }, (err) => {
       if (err) throw err;
     });
-    fs.writeFile("./deployed/kip37TokenAddress", kip37.address, (err) => {
+    fs.writeFile("./src/deployed/kip37TokenAddress", kip37.address, (err) => {
       if (err) throw err;
       console.log(
         `The deployed contract address * ${kip37.address} * is recorded in the kip37TokenAddress file`
@@ -25,7 +25,7 @@ const path = require("path");
     await fs.readFile(directory, function (err, data) {
       const abi = JSON.parse(data.toString());
       fs.writeFile(
-        "./deployed/kip37TokenABI.json",
+        "./src/deployed/kip37TokenABI.json",
         JSON.stringify(abi.abi, 2),
         (err) => {
           if (err) throw err;
